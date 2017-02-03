@@ -26,7 +26,9 @@ object Main {
     // [ERROR] [02/04/2017 00:00:22.882] [default-akka.actor.default-dispatcher-7]
     // [akka.actor.ActorSystemImpl(default)] Outgoing request stream error
     // (akka.stream.AbruptTerminationException)
-    val req = HttpRequest(uri = Uri("https://www.facebook.com/"))
+    //
+    // But point it to any regular http site and you have no errors.
+    val req = HttpRequest(uri = Uri("http://www.facebook.com/"))
     val responses = (1 to times).map { num =>
       val response = http.singleRequest(req).flatMap { r =>
         r.entity.dataBytes.runFold(ByteString.empty)(_ ++ _).map((r, _))
