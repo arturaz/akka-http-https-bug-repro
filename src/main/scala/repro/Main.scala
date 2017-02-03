@@ -32,7 +32,7 @@ object Main {
     // 1 request is enough. I thought it was related to how many requests I am doing,
     // but it seems that it is not. Although when running in our prod code we hit
     // akka.stream.BufferOverflowException: Exceeded configured max-open-requests value of [32]
-    val req = HttpRequest(uri = Uri("http://www.facebook.com/"))
+    val req = HttpRequest(uri = Uri("https://www.facebook.com/"))
     val responses = (1 to times).map { num =>
       val response = http.singleRequest(req).flatMap { r =>
         r.entity.dataBytes.runFold(ByteString.empty)(_ ++ _).map((r, _))
